@@ -1,0 +1,21 @@
+{
+  "extends": "@electron-toolkit/tsconfig/tsconfig.node.json",
+  "include": [
+    "electron.vite.config.*",
+    "electron/**/*",
+    "src/**/*",
+    "electron/main/index.ts",
+    "electron/main/logger.ts",
+    "electron/main/store.ts",
+    "electron/main/utils.ts",
+    "electron/main/index.d.ts",
+    "electron/preload/index.d.ts",
+    "electron/preload/index.ts",
+    "dist/lastfm.ts"
+  ],
+  "compilerOptions": {
+    "composite": true,
+    "types": ["electron-vite/node"],
+    "module": "esnext"
+  }
+}
