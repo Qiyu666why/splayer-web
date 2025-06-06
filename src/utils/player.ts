@@ -466,19 +466,19 @@ class Player {
       const musicStore = useMusicStore();
       if (isElectron) {
         // 客户端版本
-        const coverData = await window.electron.ipcRenderer.invoke("get-music-cover", path);
-        if (coverData) {
-          const { data, format } = coverData;
-          const blobURL = blob.createBlobURL(data, format, path);
-          if (blobURL) {
-            musicStore.playSong.cover = blobURL;
-          }
-        } else {
-          musicStore.playSong.cover = "/images/song.jpg?assest";
+      const coverData = await window.electron.ipcRenderer.invoke("get-music-cover", path);
+      if (coverData) {
+        const { data, format } = coverData;
+        const blobURL = blob.createBlobURL(data, format, path);
+        if (blobURL) {
+          musicStore.playSong.cover = blobURL;
         }
-        // 获取歌词数据
-        const lrcData = await window.electron.ipcRenderer.invoke("get-music-lyric", path);
-        parseLocalLyric(lrcData);
+      } else {
+        musicStore.playSong.cover = "/images/song.jpg?assest";
+      }
+      // 获取歌词数据
+      const lrcData = await window.electron.ipcRenderer.invoke("get-music-lyric", path);
+      parseLocalLyric(lrcData);
       } else {
         // 网页版
         // 从服务器获取元数据

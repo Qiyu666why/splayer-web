@@ -171,14 +171,14 @@ const getAllLocalMusic = debounce(
     
     if (isElectron) {
       // 客户端版本的逻辑
-      const dirContentsPromises = allPath.map((path) =>
-        window.electron.ipcRenderer.invoke("get-music-files", path),
-      );
-      const results = await Promise.allSettled(dirContentsPromises);
-      const allSongData = results
-        .filter((result) => result.status === "fulfilled")
-        .map((result) => (result as PromiseFulfilledResult<any>).value);
-      // 展平去重
+    const dirContentsPromises = allPath.map((path) =>
+      window.electron.ipcRenderer.invoke("get-music-files", path),
+    );
+    const results = await Promise.allSettled(dirContentsPromises);
+    const allSongData = results
+      .filter((result) => result.status === "fulfilled")
+      .map((result) => (result as PromiseFulfilledResult<any>).value);
+    // 展平去重
       songData = uniqBy(flattenDeep(allSongData), "id");
     } else {
       // 网页版的逻辑
